@@ -42,16 +42,16 @@ def interpolate_2d_model(fname, V, Lz, Lx):
     return c
 
 
-def load_velocity_model(name, V, resources_dir='', model_dir=''):
+def load_velocity_model(name, V, model_dir=''):
     if name == 'circle':
         pass
     elif name == 'waveguide':
         pass
     elif name == 'marmousi':
         # Load and decompress velocity model file
-        name_file = name + '.hdf5'
-        with open(os.path.join(resources_dir, model_dir, name_file), 'wb') as f:
-            with gzip.open(os.path.join(resources_dir, model_dir, name_file + '.gz'), 'rb') as g:
+        name_file = os.path.join(model_dir, name + '.hdf5')
+        with open(name_file, 'wb') as f:
+            with gzip.open(name_file + '.gz', 'rb') as g:
                 f.write(g.read())
         # Depth (km)
         Lz = 3.

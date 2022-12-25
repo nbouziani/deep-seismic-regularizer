@@ -38,10 +38,11 @@ parser.add_argument(
 
 args = parser.parse_args()
 mesh_dir = os.path.join(args.resources_dir, args.mesh_dir)
+velocity_dir = os.path.join(args.resources_dir, args.velocity_dir)
 
 mesh = Mesh(os.path.join(mesh_dir, 'marmousi_hmin_40_32k.msh'))
 V = FunctionSpace(mesh, 'DG', 2)
-vp = load_velocity_model('marmousi', V)
+vp = load_velocity_model('marmousi', V, model_dir=velocity_dir)
 
 fig, axes = plt.subplots(figsize=(17, 5))
 collection = tripcolor(vp, axes=axes)
